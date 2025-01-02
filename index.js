@@ -11,6 +11,9 @@ const  {positionModel} = require("./model/positionModel");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
+if (!uri) {
+    throw new Error('MongoDB URI is not defined!');
+  }
 
 const app = express();
 app.use(cors());
@@ -207,6 +210,6 @@ app.post("/newOrder", async(req,res)=>{
 
 app.listen(PORT, ()=>{
     console.log(`app is listening to the port 3000`);
-    mongoose.connect(uri);
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }));
     console.log("DB Started");
 })
