@@ -207,8 +207,9 @@ app.post("/newOrder", async(req,res)=>{
      newOrder.save();
      res.send("Order saved");
 });
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.listen(PORT, ()=>{
     console.log(`app is listening to the port 3000`);
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("DB Started");
 })
