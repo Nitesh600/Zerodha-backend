@@ -12,6 +12,9 @@ const  {positionModel} = require("./model/positionModel");
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 
+
+
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -185,28 +188,45 @@ app.use(bodyParser.json());
 // });
 
 app.get("/allHoldings", async(req,res)=>{
-    let allHoldings =  await HoldingsModel.find({});
-    res.json(allHoldings);
+    try{
+        let allHoldings =  await HoldingsModel.find({});
+        console.log(allHoldings);
+        res.json(allHoldings);
+    }catch(err){
+        console.log(err);
+    }
+  
 });
 app.get("/allPositions", async(req,res)=>{
-    let allPositions =  await positionModel.find({});
-    res.json(allPositions);
+    try{
+        let allPositions =  await positionModel.find({});
+        res.json(allPositions);
+    }catch(err){
+        console.log(err);
+    }
+   
 });
 
 app.post("/newOrder", async(req,res)=>{
-     let newOrder = new OrderModel({
-        name: req.body.name,
-        qty: req.body.qt,
-        price: req.body.price,
-        Mode: req.body.Mode,
-     });
+    try{
+        let newOrder = new OrderModel({
+            name: req.body.name,
+            qty: req.body.qt,
+            price: req.body.price,
+            Mode: req.body.Mode,
+         });
+    }catch(err){
+        console.log(err);
+    }
+    
 
      newOrder.save();
      res.send("Order saved");
 });
 
 app.listen(PORT, ()=>{
-    console.log(`app is listening to the port 3000`);
+    console.log(`app started on ${PORT}`);
     mongoose.connect(uri);
     console.log("DB Started");
+   
 })
