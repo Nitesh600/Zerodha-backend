@@ -10,7 +10,7 @@ const {OrderModel} = require("./model/OrderModel");
 const  {positionModel} = require("./model/positionModel");
 
 const PORT = process.env.PORT || 3002;
-const dbUrl = process.env.MONGO_URL;
+// const dbUrl = process.env.MONGO_URL;
 
 main().then(()=>{
     console.log("connected to Db");
@@ -18,7 +18,7 @@ main().then(()=>{
     console.log(err);
  });
  async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect("mongodb+srv://NiteshKumar:NiteshZerodha@zerodhacluster.344ht.mongodb.net/zerodha?retryWrites=true&w=majority&appName=ZerodhaCluster");
   
 }
 
