@@ -216,18 +216,13 @@ app.get("/allPositions", async(req,res)=>{
 });
 
 app.post("/newOrder", async(req,res)=>{
-    try{
         let newOrder = new OrderModel({
             name: req.body.name,
             qty: req.body.qt,
             price: req.body.price,
             Mode: req.body.Mode,
          });
-    }catch(err){
-        console.log(err);
-    }
     
-
      newOrder.save();
      res.send("Order saved");
 });
